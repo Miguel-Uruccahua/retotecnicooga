@@ -19,10 +19,10 @@ fun NavigationBar(
     navController: NavHostController
 ){
     val items = listOf(
+        NavigationItem.SuggestionsRoute,
         NavigationItem.ActionsRoute,
-        NavigationItem.DetailsRoute,
-        NavigationItem.SuggestionsRoute
-    )
+        NavigationItem.DetailsRoute
+        )
     BottomAppBar{
         NavigationBar {
             items.forEach { item->
@@ -43,9 +43,9 @@ sealed class NavigationItem<T>(
     val title:String,
     val icon: ImageVector
 ){
-    object ActionsRoute : NavigationItem<Actions>(Actions,"Actions", Icons.Default.Build)
-    object DetailsRoute : NavigationItem<Details>(Details,"Details", Icons.Default.List)
-    object SuggestionsRoute : NavigationItem<Suggestions>(Suggestions,"Suggestions", Icons.Default.Star)
+    object ActionsRoute : NavigationItem<Actions>(Actions,"Acciones", Icons.Default.Build)
+    object DetailsRoute : NavigationItem<Details>(Details,"Bitácora", Icons.Default.List)
+    object SuggestionsRoute : NavigationItem<Suggestions>(Suggestions,"Sugerencias", Icons.Default.Star)
 }
 
 @Composable
