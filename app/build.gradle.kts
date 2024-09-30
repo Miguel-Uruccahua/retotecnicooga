@@ -71,6 +71,12 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation(libs.androidx.hilt.navigation.compose)
 
+    //serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    //navigation
+    implementation(libs.androidx.navigation.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
