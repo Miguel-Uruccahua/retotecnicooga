@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ApplicationDao {
     @Insert
-    suspend fun insert(item: ApplicationEntity)
+    suspend fun insert(item: ApplicationEntity):Long
 
     @Delete
     suspend fun delete(item: ApplicationEntity)

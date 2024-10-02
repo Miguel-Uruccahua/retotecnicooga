@@ -1,5 +1,8 @@
 package com.example.retotecnicooga.ui.actions
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.retotecnicooga.domain.actions.ActionsRepository
@@ -11,6 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,6 +26,9 @@ class ActionsViewModel @Inject constructor(
 
     private val _dataAppDetail = MutableStateFlow<List<AppDetail>>(mutableListOf())
     val dataAppDetail: StateFlow<List<AppDetail>> = _dataAppDetail.asStateFlow()
+
+    val listState: StateFlow<List<Application>> = actionsRepository.getApplications()
+        .stateIn(viewModelScope,SharingStarted.WhileSubscribed(5000), mutableListOf())
 
     fun newApplication(application: Application){
         viewModelScope.launch {
@@ -57,10 +64,5 @@ class ActionsViewModel @Inject constructor(
             }
         }
     }
-
-    val listState: Flow<List<Application>> = actionsRepository.getApplications()
-        .stateIn(viewModelScope,SharingStarted.WhileSubscribed(5000), mutableListOf())
-
-
 
 }

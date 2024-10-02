@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.retotecnicooga.data.local.database.DatabaseApp
 import com.example.retotecnicooga.data.local.database.appdetail.AppDetailDao
 import com.example.retotecnicooga.data.local.database.application.ApplicationDao
+import com.example.retotecnicooga.data.local.database.log.LogDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,12 @@ class DatabaseModule {
     fun provideApplicationDao(databaseApp: DatabaseApp):ApplicationDao{
         return databaseApp.applicationDao()
     }
+
+    @Provides
+    fun provideLogDao(databaseApp: DatabaseApp):LogDao{
+        return databaseApp.logDao()
+    }
+
 
     @Provides
     @Singleton

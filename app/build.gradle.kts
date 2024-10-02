@@ -85,6 +85,9 @@ dependencies {
     //DateTimePicker
     implementation(libs.io.github.vanpra.compose)
 
+    //LIVEDATA
+    implementation(libs.androidx.livedata)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

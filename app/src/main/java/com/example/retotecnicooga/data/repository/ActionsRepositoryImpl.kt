@@ -6,14 +6,14 @@ import com.example.retotecnicooga.data.local.database.appdetail.asEntity
 import com.example.retotecnicooga.data.local.database.application.ApplicationDao
 import com.example.retotecnicooga.data.local.database.application.asDomain
 import com.example.retotecnicooga.data.local.database.application.asEntity
+import com.example.retotecnicooga.data.local.database.log.LogDao
+import com.example.retotecnicooga.data.local.database.log.LogEntity
 import com.example.retotecnicooga.domain.actions.ActionsRepository
 import com.example.retotecnicooga.domain.model.AppDetail
 import com.example.retotecnicooga.domain.model.Application
+import com.example.retotecnicooga.domain.model.LogDetail
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onCompletion
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -21,40 +21,60 @@ import javax.inject.Inject
 
 class ActionsRepositoryImpl @Inject constructor(
     private val applicationDao: ApplicationDao,
-    private val appDetailDao: AppDetailDao
-): ActionsRepository {
+    private val appDetailDao: AppDetailDao,
+    private val logDao: LogDao
+    ) : ActionsRepository {
 
     override suspend fun addApplication(application: Application) {
-        applicationDao.insert(application.asEntity())
+        val id = applicationDao.insert(application.asEntity())
+        generateLog(application.name,id.toInt(),0,LogDetail.ADDAPP)
     }
 
     override suspend fun addAppDetail(appDetail: AppDetail) {
-        val detail = appDetail.copy(dateCreated = getDate() )
-        appDetailDao.insert(detail.asEntity())
+        val detail = appDetail.copy(dateCreated = getDate())
+        val id = appDetailDao.insert(detail.asEntity())
+        generateLog(appDetail.title,0,id.toInt(),LogDetail.ADDAPPDETAIL)
     }
 
     override suspend fun deleteApplication(application: Application) {
         applicationDao.delete(application.asEntity())
+        generateLog(application.name,application.id,0,LogDetail.DETELEAPP)
     }
 
-    override fun getApplications(): Flow<List<Application>>{
-        return applicationDao.getAll().map { items->items.map{it.asDomain()}}
+    override fun getApplications(): Flow<List<Application>> {
+        return applicationDao.getAll().map { items -> items.map { it.asDomain() } }
     }
 
     override suspend fun getAppDetail(application: Application): List<AppDetail> {
-        return appDetailDao.getOneById(application.id).map { items-> items.asDomain() }
+        return appDetailDao.getOneById(application.id).map { items -> items.asDomain() }
     }
 
     override suspend fun updateAppDetail(appDetail: AppDetail) {
         appDetailDao.update(appDetail.asEntity())
+        generateLog(appDetail.title,appDetail.idApplication,appDetail.id,LogDetail.UPDATEAPPDETAIL)
     }
 
-    private fun getDate(pattern: String = "yyyyMMdd"):String{
+    private fun getDate(pattern: String = "yyyyMMdd"): String {
         val dateFormat = SimpleDateFormat(pattern, Locale.getDefault())
         val date = Date()
         return dateFormat.format(date)
     }
 
-
+    private suspend fun generateLog(
+        reference: String,
+        idApplication: Int,
+        idAppDetail: Int,
+        logDetail: LogDetail
+    ) {
+        logDao.insert(LogEntity(
+            id=0,
+            action = logDetail,
+            idAppDetail = idAppDetail,
+            idApplication = idApplication,
+            reference = reference,
+            date = getDate()
+            )
+        )
+    }
 
 }

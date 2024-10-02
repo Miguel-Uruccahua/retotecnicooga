@@ -10,7 +10,7 @@ import androidx.room.Update
 interface AppDetailDao {
 
     @Insert
-    suspend fun insert(item: AppDetailEntity)
+    suspend fun insert(item: AppDetailEntity):Long
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(item: AppDetailEntity)

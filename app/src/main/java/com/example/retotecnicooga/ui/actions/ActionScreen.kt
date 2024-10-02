@@ -19,13 +19,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -44,13 +41,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.retotecnicooga.domain.model.AppDetail
 import com.example.retotecnicooga.domain.model.Application
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActionScreen(viewModel: ActionsViewModel = hiltViewModel()) {
 
     val showDialogApp = remember { mutableStateOf(false) }
     val showDialogAppDetail = remember { mutableStateOf(false) }
-    val list by viewModel.listState.collectAsStateWithLifecycle(mutableListOf())
+    val list by viewModel.listState.collectAsStateWithLifecycle()
     val dataAppDetail by viewModel.dataAppDetail.collectAsState()
 
     if (showDialogApp.value) {
@@ -74,14 +70,6 @@ fun ActionScreen(viewModel: ActionsViewModel = hiltViewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
-        OutlinedTextField(value = "",
-            onValueChange = {},
-            modifier = Modifier
-                .padding(2.dp)
-                .fillMaxWidth(),
-            label = { Text(text = "Busqueda") },
-            leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "") })
 
         Button(
             onClick = { showDialogApp.value = true },
@@ -116,7 +104,8 @@ fun listApplication(
     LazyColumn(
         state = scrollState,
         contentPadding = PaddingValues(8.dp),
-        verticalArrangement = Arrangement.spacedBy(5.dp)
+        verticalArrangement = Arrangement.spacedBy(5.dp),
+        modifier = Modifier.padding(bottom = 80.dp)
     ) {
         items(listApplication, key = { it.id }) { item ->
             AccessItem(item, onDelete = { onDelete(item) }, onInfo = { onInfo(item) }, onAdd = { onAdd(it)} )

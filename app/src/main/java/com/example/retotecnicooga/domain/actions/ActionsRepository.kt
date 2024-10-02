@@ -12,6 +12,9 @@ interface ActionsRepository {
     suspend fun deleteApplication(application: Application)
 
      fun getApplications(): Flow<List<Application>>
+
      suspend fun getAppDetail(application: Application): List<AppDetail>
+
      suspend fun updateAppDetail(appDetail: AppDetail)
+
 }

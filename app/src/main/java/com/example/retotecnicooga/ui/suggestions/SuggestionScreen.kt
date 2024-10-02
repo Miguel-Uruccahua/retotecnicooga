@@ -6,3 +6,10 @@ import androidx.compose.runtime.Composable
 fun SuggestionScreen() {
 
 }
+
+fun messageSuggestions(value:String) {
+    when(value){
+        ""-> {}
+        else-> {}
+    }
+}
