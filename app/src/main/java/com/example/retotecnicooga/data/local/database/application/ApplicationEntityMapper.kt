@@ -8,6 +8,7 @@ object ApplicationEntityMapper:EntityMapper<Application, ApplicationEntity> {
     override fun asEntity(domain: Application): ApplicationEntity {
         return ApplicationEntity(
             id = domain.id,
+            name = domain.name,
             type = domain.type,
             minCompatibility = domain.minCompatibility,
             maxCompatibility = domain.maxCompatibility,
@@ -19,6 +20,7 @@ object ApplicationEntityMapper:EntityMapper<Application, ApplicationEntity> {
     override fun asDomain(entity: ApplicationEntity): Application {
         return Application(
             id = entity.id,
+            name = entity.name,
             type = entity.type,
             minCompatibility = entity.minCompatibility,
             maxCompatibility = entity.maxCompatibility,

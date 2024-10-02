@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class ApplicationEntity(
     @PrimaryKey(autoGenerate = true)
     val id : Int,
+    val name: String,
     val type: String,
     val minCompatibility: String,
     val maxCompatibility: String,

@@ -26,14 +26,16 @@ class DatabaseModule {
         return databaseApp.applicationDao()
     }
 
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext appContext: Context): DatabaseApp {
+        return Room.databaseBuilder(
+            appContext,
+            DatabaseApp::class.java,
+            "RTOGA"
+        ).build()
+    }
+
+
 }
 
-@Provides
-@Singleton
-fun provideAppDatabase(@ApplicationContext appContext: Context): DatabaseApp {
-    return Room.databaseBuilder(
-        appContext,
-        DatabaseApp::class.java,
-        "RTOGA"
-    ).build()
-}
