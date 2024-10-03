@@ -1,8 +1,8 @@
 
 
-# Reminder App
+# TCOGA
 
-Aplication with notification for datetime implements Arquitecture Template
+Aplication Optimizing Application Management
 
 
 ## Demo
