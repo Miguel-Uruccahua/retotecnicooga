@@ -1,6 +1,6 @@
 
 
-# TCOGA
+# TCO
 
 Aplication Optimizing Application Management
 
