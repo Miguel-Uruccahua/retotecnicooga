@@ -56,7 +56,7 @@ fun dialogNewAppDetail(detail: AppDetail?, onDismiss:()->Unit, onSave:(AppDetail
     var dateFinishContent: String by remember { mutableStateOf(detail?.dateFinish ?: "") }
 
     val priority = listOf("Critica", "Alta", "Media","Baja")
-    val state = listOf("En Revisión", "Sin Asignar", "En Desarrollo", "Cerrado")
+    val state = listOf("En Revisión", "Sin Asignar", "Cerrado")
     var showDateTime by remember { mutableStateOf(false) }
     val dateDialogState = rememberMaterialDialogState()
 
