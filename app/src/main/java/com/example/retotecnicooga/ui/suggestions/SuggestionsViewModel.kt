@@ -27,4 +27,8 @@ class SuggestionsViewModel @Inject constructor(
     val listEmptySuggestion: StateFlow<List<Suggestion>> = suggestionsRepository.getDateEmptySuggestions()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), mutableListOf())
 
+    val listDuplicateSuggestion: StateFlow<List<Suggestion>> = suggestionsRepository.getDuplicateType()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), mutableListOf())
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.retotecnicooga.data.local.database
 
+import android.content.Context
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.retotecnicooga.data.local.database.appdetail.AppDetailDao

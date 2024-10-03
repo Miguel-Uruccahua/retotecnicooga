@@ -16,5 +16,6 @@ interface ActionsRepository {
      suspend fun getAppDetail(application: Application): List<AppDetail>
 
      suspend fun updateAppDetail(appDetail: AppDetail)
+     suspend fun insertData()
 
 }

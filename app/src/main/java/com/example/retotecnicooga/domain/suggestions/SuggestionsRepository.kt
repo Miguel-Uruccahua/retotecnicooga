@@ -9,5 +9,5 @@ interface SuggestionsRepository {
     fun getPrioritySuggestions(): Flow<List<Suggestion>>
     fun getAssignmentSuggestions(): Flow<List<Suggestion>>
     fun getDateEmptySuggestions(): Flow<List<Suggestion>>
-
+    fun getDuplicateType(): Flow<List<Suggestion>>
 }

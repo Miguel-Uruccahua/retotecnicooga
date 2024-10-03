@@ -14,4 +14,7 @@ interface LogDao {
     @Query("Select * from LogEntity")
     fun getAll(): Flow<List<LogEntity>>
 
+    @Query("Select * from LogEntity")
+    suspend fun getAllOne(): List<LogEntity>
+
 }

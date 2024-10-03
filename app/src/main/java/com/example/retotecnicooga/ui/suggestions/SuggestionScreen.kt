@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Icon
@@ -46,12 +47,14 @@ fun SuggestionScreen(viewModel: SuggestionsViewModel = hiltViewModel()) {
     val listEmptySuggestion by viewModel.listEmptySuggestion.collectAsStateWithLifecycle()
     val listPrioritySuggestion by viewModel.listPrioritySuggestion.collectAsStateWithLifecycle()
     val listAssignmentSuggestion by viewModel.listAssignmentSuggestion.collectAsStateWithLifecycle()
+    val listDuplicateSuggestion by viewModel.listDuplicateSuggestion.collectAsStateWithLifecycle()
 
     Column(Modifier.padding(bottom = 80.dp)) {
         ListApplication(listPrioritySuggestion,"Requiere Atención Urgente",Icons.Default.Warning)
         ListApplication(listLowerSuggestion,"Actualizar para Soporte Google Play",Icons.Default.Refresh)
         ListApplication(listAssignmentSuggestion,"Evento Sin Asignar",Icons.Default.AccountCircle)
         ListApplication(listEmptySuggestion,"Evento Finalizado Sin Fecha de Finalización",Icons.Default.DateRange)
+        ListApplication(listDuplicateSuggestion,"2 Aplicaciones del mismo tipo",Icons.Default.Notifications)
     }
 
 }

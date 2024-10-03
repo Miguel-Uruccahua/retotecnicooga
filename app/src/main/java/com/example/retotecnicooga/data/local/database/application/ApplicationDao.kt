@@ -19,6 +19,9 @@ interface ApplicationDao {
     @Query("Select * from Applicationentity")
     fun getAll(): Flow<List<ApplicationEntity>>
 
+    @Query("Select * from Applicationentity Limit 1")
+    suspend fun getOne(): ApplicationEntity?
+
     @Query("""
            select app.name as appName, app.type as type, '' as detail
             from Applicationentity app 
@@ -56,6 +59,9 @@ interface ApplicationDao {
             where ade.state = 'Finalizado' and ade.dateFinish = ''
             """)
     fun getDateEmpty(): Flow<List<Suggestion>>
+
+    @Insert
+    fun insertAll(applicationList: List<ApplicationEntity>)
 
 
 }
